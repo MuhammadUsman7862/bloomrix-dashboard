@@ -1,0 +1,9 @@
+@use "../abstracts" as *;
+
+.modal {
+  @include surface; color: var(--text);
+  inline-size: min(rem(448), 92vw); padding: var(--space-3);
+  &::backdrop { background: rgb(0 0 0 / 0.6); }
+  &__form { display: grid; gap: var(--space-2); }
+  &__actions { display: flex; justify-content: flex-end; gap: var(--space-1); }
+}

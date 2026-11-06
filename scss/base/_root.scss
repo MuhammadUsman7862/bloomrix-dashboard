@@ -1,0 +1,20 @@
+@use "sass:list";
+@use "../abstracts" as *;
+
+// Design system: the maps become CSS custom properties (LOOPS)
+:root {
+  color-scheme: light dark;
+  @each $name, $pair in $colors {
+    --#{$name}: light-dark(#{list.nth($pair, 1)}, #{list.nth($pair, 2)});
+  }
+  @each $key, $size in $space {
+    --space-#{$key}: #{$size};
+  }
+  --radius-s: #{rem(6)};
+  --radius-m: #{rem(12)};
+  --shadow-s: 0 1px 3px rgb(0 0 0 / 0.15);
+  --shadow-m: 0 8px 20px rgb(0 0 0 / 0.2);
+  --fs-sm: #{rem(14)};
+  --fs-h1: clamp(1.5rem, 1.1rem + 2vw, 2.25rem);     // fluid heading
+  --fs-stat: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);    // fluid number
+}

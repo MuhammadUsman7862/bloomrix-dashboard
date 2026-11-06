@@ -1,0 +1,75 @@
+@use "../abstracts" as *;
+
+// Page grid: phone = one column, desktop = sidebar + content
+.shell {
+  display: grid;
+  min-block-size: 100dvh;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "top" "main";
+  @include respond(lg) {
+    grid-template-columns: rem(256) minmax(0, 1fr);
+    grid-template-areas: "side top" "side main";
+  }
+}
+.shell__main { grid-area: main; padding: clamp(1rem, 0.5rem + 2vw, 2rem); }
+
+// Sidebar: slides in on phones, always visible on desktop
+.sidebar {
+  grid-area: side;
+  position: fixed; inset-block: 0; inset-inline-start: 0; z-index: 30;
+  inline-size: min(rem(256), 80vw);
+  display: flex; flex-direction: column; gap: var(--space-1);
+  padding: var(--space-2);
+  background: var(--surface); border-inline-end: 1px solid var(--line);
+  transform: translateX(-100%); visibility: hidden;
+  transition: transform 0.25s, visibility 0.25s;
+  &--open { transform: none; visibility: visible; }
+  @include respond(lg) {
+    position: sticky; inset-block-start: 0; block-size: 100dvh;
+    inline-size: auto; z-index: auto; transform: none; visibility: visible;
+  }
+}
+.sidebar__brand { margin-block-end: var(--space-2); font-size: 1.25rem; font-weight: 800; color: var(--primary); }
+.sidebar__link {
+  display: block; padding: 0.5rem 0.8rem; border-radius: var(--radius-s);
+  color: var(--text); text-decoration: none; transition: background-color 0.2s;
+  &:hover { background: var(--stripe); }
+  &--active { background: var(--primary); color: var(--on-primary); &:hover { background: var(--primary); } }
+}
+
+// Dark layer behind the open sidebar (phones only)
+.overlay {
+  position: fixed; inset: 0; z-index: 20; background: rgb(0 0 0 / 0.5);
+  opacity: 0; pointer-events: none; transition: opacity 0.25s;
+  &--show { opacity: 1; pointer-events: auto; }
+  @include respond(lg) { display: none; }
+}
+
+// Top navigation (Flexbox)
+.topbar {
+  grid-area: top; position: sticky; inset-block-start: 0; z-index: 10;
+  display: flex; align-items: center; gap: var(--space-2);
+  padding: 0.75rem clamp(1rem, 0.5rem + 2vw, 2rem);
+  background: var(--surface); border-block-end: 1px solid var(--line);
+}
+.topbar__menu {
+  padding: 0.4rem 0.7rem; border: 1px solid var(--line); border-radius: var(--radius-s);
+  background: transparent; font-size: 1.25rem; line-height: 1; cursor: pointer;
+  &:hover { background: var(--stripe); }
+  @include respond(lg) { display: none; }
+}
+.topbar__title { flex: 1; font-weight: 700; }
+.topbar__name { display: none; @include respond(md) { display: inline; } }
+.topbar__avatar {
+  display: grid; place-items: center; inline-size: 2.25rem; block-size: 2.25rem;
+  border-radius: 50%; background: var(--primary); color: var(--on-primary); font-weight: 700;
+}
+
+// Page content
+.page { display: grid; gap: var(--space-3); }
+.page__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); }
+.page__title { font-size: var(--fs-h1); line-height: 1.2; }
+.page__note { color: var(--muted); font-size: var(--fs-sm); }
+.stats { display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fit, minmax(min(100%, rem(200)), 1fr)); }
+.filters { display: flex; flex-wrap: wrap; align-items: end; gap: var(--space-2); }

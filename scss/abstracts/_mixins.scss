@@ -1,0 +1,19 @@
+@use "sass:map";
+@use "variables" as v;
+
+// MIXIN 1: media query from the $breakpoints map
+@mixin respond($key) {
+  @media (min-width: map.get(v.$breakpoints, $key)) { @content; }
+}
+// MIXIN 2: one focus style used everywhere
+@mixin focus-ring {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+// MIXIN 3: the "card" look
+@mixin surface {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-s);
+}

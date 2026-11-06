@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bloomrix Dashboard</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div class="shell">
+
+  <!-- SIDEBAR (slides in on phones) -->
+  <aside class="sidebar" id="sidebar" aria-label="Sidebar">
+    <p class="sidebar__brand">Bloomrix</p>
+    <a class="sidebar__link sidebar__link--active" href="#" aria-current="page">Overview</a>
+    <a class="sidebar__link" href="#">Orders</a>
+    <a class="sidebar__link" href="#">Customers</a>
+    <a class="sidebar__link" href="#">Reports</a>
+    <a class="sidebar__link" href="#">Settings</a>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- TOP NAVIGATION -->
+  <header class="topbar">
+    <button class="topbar__menu" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">&#9776;</button>
+    <span class="topbar__title">Dashboard</span>
+    <span class="topbar__name">Usman Khan</span>
+    <span class="topbar__avatar" aria-hidden="true">U</span>
+  </header>
+
+  <main class="shell__main">
+    <div class="page">
+
+      <!-- PAGE HEADING -->
+      <div class="page__head">
+        <div>
+          <h1 class="page__title">Overview</h1>
+          <p class="page__note">Orders and revenue for this month.</p>
+        </div>
+        <button class="btn" id="open-modal" type="button">+ New order</button>
+      </div>
+
+      <!-- SUMMARY CARDS -->
+      <section class="stats" aria-label="Summary">
+        <div class="stats__item"><div class="stat"><span class="stat__label">Revenue</span><span class="stat__value">$12,480</span><span class="stat__trend">&#9650; 12%</span></div></div>
+        <div class="stats__item"><div class="stat"><span class="stat__label">Orders</span><span class="stat__value">324</span><span class="stat__trend">&#9650; 8%</span></div></div>
+        <div class="stats__item"><div class="stat"><span class="stat__label">Customers</span><span class="stat__value">1,092</span><span class="stat__trend">&#9650; 3%</span></div></div>
+        <div class="stats__item"><div class="stat"><span class="stat__label">Refunds</span><span class="stat__value">14</span><span class="stat__trend stat__trend--down">&#9660; 2%</span></div></div>
+      </section>
+
+      <!-- FILTERS -->
+      <form class="filters" role="search" onsubmit="return false">
+        <div class="field"><label class="field__label" for="f-search">Search</label>
+          <input class="field__input" id="f-search" type="search" placeholder="Customer or order"></div>
+        <div class="field"><label class="field__label" for="f-status">Status</label>
+          <select class="field__input" id="f-status"><option value="all">All</option><option value="paid">Paid</option><option value="pending">Pending</option><option value="failed">Failed</option></select></div>
+        <p class="page__note" id="count" role="status"></p>
+      </form>
+
+      <!-- DATA TABLE -->
+      <div class="table__wrap">
+        <table class="table">
+          <caption hidden>Recent orders</caption>
+          <thead><tr><th class="table__head" scope="col">Order</th><th class="table__head" scope="col">Customer</th><th class="table__head" scope="col">Amount</th><th class="table__head" scope="col">Status</th></tr></thead>
+          <tbody id="orders">
+            <tr class="table__row" data-status="paid"><td class="table__cell">#1001</td><td class="table__cell"><Abbr>Abdul Manan</Abbr></td><td class="table__cell">$120.00</td><td class="table__cell"><span class="badge badge--paid">Paid</span></td></tr>
+            <tr class="table__row" data-status="pending"><td class="table__cell">#1002</td><td class="table__cell">Bilal Ahmed</td><td class="table__cell">$75.50</td><td class="table__cell"><span class="badge badge--pending">Pending</span></td></tr>
+            <tr class="table__row" data-status="paid"><td class="table__cell">#1003</td><td class="table__cell">Touseef Ahmed</td><td class="table__cell">$240.00</td><td class="table__cell"><span class="badge badge--paid">Paid</span></td></tr>
+            <tr class="table__row" data-status="failed"><td class="table__cell">#1004</td><td class="table__cell">Tehreem</td><td class="table__cell">$60.00</td><td class="table__cell"><span class="badge badge--failed">Failed</span></td></tr>
+            <tr class="table__row" data-status="pending"><td class="table__cell">#1005</td><td class="table__cell">Asim inayat</td><td class="table__cell">$310.25</td><td class="table__cell"><span class="badge badge--pending">Pending</span></td></tr>
+            <tr class="table__row" data-status="paid"><td class="table__cell">#1006</td><td class="table__cell">Muhammad Ali</td><td class="table__cell">$99.99</td><td class="table__cell"><span class="badge badge--paid">Paid</span></td></tr>
+          </tbody>
+        </table>
+        <p class="table__empty" id="empty" hidden>No orders match your filters.</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- MODAL FORM -->
+<dialog class="modal" id="modal" aria-labelledby="modal-title">
+  <form class="modal__form" id="order-form" novalidate>
+    <h2 id="modal-title">New order</h2>
+    <div class="field" id="name-field"><label class="field__label" for="o-name">Customer name</label>
+      <input class="field__input" id="o-name" type="text" autocomplete="off"><p class="field__msg" id="name-msg"></p></div>
+    <div class="field" id="amount-field"><label class="field__label" for="o-amount">Amount ($)</label>
+      <input class="field__input" id="o-amount" type="number" step="0.01"><p class="field__msg" id="amount-msg"></p></div>
+    <div class="modal__actions">
+      <button class="btn btn--outline" type="button" id="cancel">Cancel</button>
+      <button class="btn" type="submit" id="save">Save order</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="js/dashboard.js"></script>
+</body>
+</html>

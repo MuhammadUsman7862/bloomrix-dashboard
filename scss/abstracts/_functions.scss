@@ -1,0 +1,3 @@
+@use "sass:math";
+// FUNCTION: rem(14) -> 0.875rem  (turns pixel numbers into rem)
+@function rem($px) { @return math.div($px, 16) * 1rem; }

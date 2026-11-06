@@ -1,0 +1,9 @@
+@use "../abstracts" as *;
+
+// The wrapper scrolls sideways on small screens, so the PAGE never does
+.table__wrap { @include surface; overflow-x: auto; }
+.table { inline-size: 100%; min-inline-size: rem(560); border-collapse: collapse; }
+.table__head { background: var(--stripe); text-align: start; }
+.table__head, .table__cell { padding: 0.7rem 1rem; text-align: start; }
+.table__row { border-block-start: 1px solid var(--line); &:hover { background: var(--stripe); } }
+.table__empty { padding: var(--space-3); color: var(--muted); }

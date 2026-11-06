@@ -1,0 +1,15 @@
+@use "../abstracts" as *;
+
+.field {
+  display: grid; gap: 0.35rem;
+  &__label { font-weight: 700; }
+  &__input {
+    inline-size: 100%; min-block-size: 2.75rem; padding: 0.6rem 0.8rem; background: var(--surface);
+    border: 2px solid var(--line); border-radius: var(--radius-s); transition: border-color 0.2s;
+    &:hover { border-color: var(--muted); }
+    &:focus-visible { @include focus-ring; border-color: var(--focus); }
+    &:disabled { background: var(--stripe); cursor: not-allowed; }
+  }
+  &__msg { min-block-size: 1.4em; color: var(--bad); font-size: var(--fs-sm); }     // error text
+  &--error &__input { border-color: var(--bad); }                                    // error state
+}

@@ -1,0 +1,14 @@
+@use "../abstracts" as *;
+
+.badge {
+  display: inline-block; padding: 0.15rem 0.7rem; border-radius: 99px;
+  font-size: var(--fs-sm); font-weight: 700;
+  background: var(--status-bg, var(--stripe)); color: var(--status, var(--text));
+}
+// LOOP: one modifier per status in the $statuses map
+@each $name, $token in $statuses {
+  .badge--#{$name} {
+    --status: var(--#{$token});
+    --status-bg: color-mix(in srgb, var(--#{$token}) 18%, transparent);
+  }
+}

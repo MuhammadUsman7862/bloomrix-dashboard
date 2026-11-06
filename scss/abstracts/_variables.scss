@@ -1,0 +1,22 @@
+// Data only. (light, dark) colour pairs, spacing scale, breakpoints, badge colours.
+$breakpoints: (md: 40em, lg: 64em);
+
+$colors: (
+  bg:         (#f4f7f9, #0e151c),
+  surface:    (#ffffff, #16212b),
+  stripe:     (#eef3f6, #1d2a36),
+  text:       (#17222d, #e7eef5),
+  muted:      (#475666, #a8b6c3),
+  line:       (#c5d0da, #33434f),
+  primary:    (#0b5a6b, #62cbe0),
+  on-primary: (#ffffff, #04202a),
+  focus:      (#0b4fd6, #ffd166),
+  good:       (#0b6a2e, #7fe0a0),
+  warn:       (#6b4b00, #ffd76a),
+  bad:        (#a3121f, #ff8a94)
+);
+
+$space: (1: 0.5rem, 2: 1rem, 3: 1.5rem, 4: 2.5rem);
+
+// status name -> colour token (used by the badge loop)
+$statuses: (paid: good, pending: warn, failed: bad);
