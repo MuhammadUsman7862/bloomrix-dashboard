@@ -18,7 +18,7 @@ scss/
     _button  _badge  _stat  _field  _table  _modal
 ```
 ## Install + compile
-```
+``
 npm install -g sass
 sass scss/main.scss css/main.css            (compile once)
 sass --watch scss/main.scss css/main.css    (re-compile on every save)
