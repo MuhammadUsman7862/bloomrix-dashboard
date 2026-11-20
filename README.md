@@ -1,5 +1,4 @@
 # Bloomrix Dashboard (SCSS)
-
 ## SCSS folder structure
 ```
 scss/
